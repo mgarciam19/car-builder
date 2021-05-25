@@ -24,7 +24,7 @@ public class VehicleInvoiceApp {
                 .addPart(new Wheel())
                 .addPart(new Wheel())
                 .addPart(new Wheel())
-                .addPart(new Wheel())
+                .addPart(new Wheel())                
                 .addPart(new Tire())
                 .addPart(new Tire())
                 .addPart(new Tire())
@@ -33,7 +33,7 @@ public class VehicleInvoiceApp {
                 .addPart(new Seat())
                 .addPart(new Seat())
                 .addPart(new Seat())
-                .addPart(new Seat())
+                .addPart(new Seat())                
                 .build();
     }
 

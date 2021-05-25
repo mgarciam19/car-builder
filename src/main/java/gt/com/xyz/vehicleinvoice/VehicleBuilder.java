@@ -1,15 +1,29 @@
 package gt.com.xyz.vehicleinvoice;
 
+import gt.com.xyz.vehicleinvoice.part.Engine;
+import gt.com.xyz.vehicleinvoice.part.GearBox;
+import gt.com.xyz.vehicleinvoice.part.Headlight;
 import gt.com.xyz.vehicleinvoice.part.Part;
+import gt.com.xyz.vehicleinvoice.part.Seat;
+import gt.com.xyz.vehicleinvoice.part.Tire;
+import gt.com.xyz.vehicleinvoice.part.Wheel;
 import java.util.*;
 
 public class VehicleBuilder {
+    
+    public static final int MAX_ENGINE = 1;
+    public static final int MAX_GEAR_BOX = 1;
+    public static final int MAX_WHEEL = 4;
+    public static final int MAX_TIRE = 4;
+    public static final int MAX_SEAT = 5;
+    public static final int MAX_HEADLIGHT = 2;    
 
-    private Map<String, Integer> items;
+    private Map<String, Integer> partsCount;
+    
     private List<Part> parts;
     
     public VehicleBuilder() {
-        this.items = new HashMap();
+        this.partsCount = new HashMap();
         this.parts = new LinkedList();
     }   
 
@@ -25,12 +39,32 @@ public class VehicleBuilder {
         this.buildInvoice();
     }
 
-    private void reviewParts() {                
-        for (Part part : this.parts) {  
-            if (this.items.containsKey(part)) {
-                this.items.put(part.getName(), this.items.get(part.getName()) + 1);           
+    private void reviewParts() throws Exception {                
+        for (Part part : this.parts) {            
+            if (this.partsCount.containsKey(part.getName())) {
+                int maxAllowedParts = 1;
+                
+                if (part instanceof Engine) {
+                    maxAllowedParts = MAX_ENGINE;
+                } else if (part instanceof GearBox) {
+                    maxAllowedParts = MAX_GEAR_BOX;
+                } else if (part instanceof Wheel) {
+                    maxAllowedParts = MAX_WHEEL;
+                } else if (part instanceof Tire) {
+                    maxAllowedParts = MAX_TIRE;
+                } else if (part instanceof Seat) {
+                    maxAllowedParts = MAX_SEAT;
+                } else if (part instanceof Headlight) {
+                    maxAllowedParts = MAX_HEADLIGHT;
+                }
+                
+                if (this.partsCount.get(part.getName()) >= maxAllowedParts) {
+                    throw new Exception(String.format("Se ha excedido la cantidad máxima de partes de tipo %s", part.getName()));
+                }
+                
+                this.partsCount.put(part.getName(), this.partsCount.get(part.getName()) + 1);           
             } else {
-                this.items.put(part.getName(), 1);
+                this.partsCount.put(part.getName(), 1);
             }
         }        
     }
