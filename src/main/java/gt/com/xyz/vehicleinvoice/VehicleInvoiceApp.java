@@ -12,7 +12,7 @@ public class VehicleInvoiceApp {
     public VehicleInvoiceApp() {
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         VehicleBuilder builder = new VehicleBuilder();
         
         //build the vehicle
