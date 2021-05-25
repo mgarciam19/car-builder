@@ -15,6 +15,7 @@ public class VehicleInvoiceApp {
     public static void main(String[] args) {
         VehicleBuilder builder = new VehicleBuilder();
         
+        //build the vehicle
         builder
                 .addPart(new Engine())
                 .addPart(new GearBox())
